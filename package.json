@@ -1,0 +1,45 @@
+{
+  "name": "make-it-12",
+  "version": "1.0.0",
+  "description": "A modern puzzle game where players combine tiles to make combinations that equal exactly 12",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/",
+    "dev": "live-server --port=3000 --open=/",
+    "build": "echo 'No build step required - pure HTML/CSS/JS game'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linter configured'"
+  },
+  "keywords": [
+    "puzzle",
+    "game",
+    "html5",
+    "javascript",
+    "css3",
+    "math",
+    "strategy",
+    "mobile-friendly",
+    "responsive"
+  ],
+  "author": "Team No 1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/make-it-12.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/make-it-12/issues"
+  },
+  "homepage": "https://github.com/yourusername/make-it-12#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

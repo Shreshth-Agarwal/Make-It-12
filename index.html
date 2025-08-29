@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make It 12</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen active">
+        <div class="splash-content">
+            <div class="game-logo">
+                <h1>Make It 12</h1>
+                <div class="logo-subtitle">Puzzle Challenge</div>
+            </div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen">
+        <div class="menu-card">
+            <div class="menu-header">
+                <h2>Make It 12</h2>
+                <button id="sound-toggle" class="icon-button" title="Toggle Sound">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="menu-buttons">
+                <button id="start-game" class="primary-button">Start Game</button>
+                <button id="achievements" class="primary-button">Achievements</button>
+                <button id="leaderboard" class="primary-button">Leaderboard</button>
+            </div>
+            <div class="menu-footer">
+                <button id="settings" class="icon-button" title="Settings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </button>
+                <button id="social" class="icon-button" title="Social">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="tutorial-header">
+                <h3>How to Play</h3>
+                <button id="close-tutorial" class="close-button">&times;</button>
+            </div>
+            <div class="tutorial-steps">
+                <div class="tutorial-step active" data-step="1">
+                    <h4>Step 1: Select Tiles</h4>
+                    <p>Tap on tiles to select them. Selected tiles will be highlighted.</p>
+                    <div class="tutorial-demo">
+                        <div class="demo-tile selected">5</div>
+                        <div class="demo-tile">3</div>
+                        <div class="demo-tile">4</div>
+                    </div>
+                </div>
+                <div class="tutorial-step" data-step="2">
+                    <h4>Step 2: Make Combinations</h4>
+                    <p>Select tiles that add up to exactly 12. You can select multiple tiles!</p>
+                    <div class="tutorial-demo">
+                        <div class="demo-tile selected">5</div>
+                        <div class="demo-tile selected">3</div>
+                        <div class="demo-tile selected">4</div>
+                        <div class="demo-result">= 12 ✓</div>
+                    </div>
+                </div>
+                <div class="tutorial-step" data-step="3">
+                    <h4>Step 3: Clear and Score</h4>
+                    <p>When you make 12, the tiles disappear and you earn points. Chain combos for bonus points!</p>
+                </div>
+            </div>
+            <div class="tutorial-controls">
+                <button id="prev-step" class="secondary-button" disabled>Previous</button>
+                <button id="next-step" class="primary-button">Next</button>
+                <button id="skip-tutorial" class="text-button">Skip Tutorial</button>
+            </div>
+            <div class="cursor-ai-toggle">
+                <label class="toggle-label">
+                    <input type="checkbox" id="cursor-ai-toggle">
+                    <span class="toggle-slider"></span>
+                    Cursor AI Assist
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="game-hud">
+            <div class="hud-top">
+                <div class="health-display">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span id="health-value">3</span>
+                </div>
+                <div class="level-display">
+                    <span id="current-level">Level 1</span>
+                </div>
+                <div class="timer-display">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                    <span id="time-left">60</span>
+                </div>
+            </div>
+            <div class="game-board" id="game-board">
+                <!-- Game tiles will be generated here -->
+            </div>
+            <div class="hud-bottom">
+                <div class="combo-display">
+                    <span id="combo-text">Combo x1</span>
+                </div>
+                <div class="score-display">
+                    <span id="score-text">Score: 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Level Modal -->
+    <div id="end-level-modal" class="modal hidden">
+        <div class="modal-content end-level">
+            <h2>Level Complete!</h2>
+            <div class="score-summary">
+                <div class="score-item">
+                    <span class="score-label">Total Score</span>
+                    <span id="final-score" class="score-value">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Time Bonus</span>
+                    <span id="time-bonus" class="score-value">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Combo Bonus</span>
+                    <span id="combo-bonus" class="score-value">0</span>
+                </div>
+            </div>
+            <div class="end-level-buttons">
+                <button id="next-level" class="primary-button">Next Level</button>
+                <button id="replay-level" class="secondary-button">Replay</button>
+                <button id="share-achievement" class="icon-button" title="Share Achievement">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                    <span>Share</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal hidden">
+        <div class="modal-content share-modal">
+            <h3>Share Your Achievement</h3>
+            <div class="achievement-preview">
+                <div class="achievement-card">
+                    <div class="achievement-header">
+                        <h4>Level 1 Complete!</h4>
+                        <div class="achievement-stats">
+                            <span>Score: <span id="share-score">0</span></span>
+                            <span>Time: <span id="share-time">0s</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="share-platforms">
+                <button class="share-platform instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4z"/>
+                    </svg>
+                    Instagram Stories
+                </button>
+                <button class="share-platform twitter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.665 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                    Twitter
+                </button>
+                <button class="share-platform facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </button>
+                <button class="share-platform copy-link">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Copy Link
+                </button>
+            </div>
+            <div class="custom-message">
+                <label for="share-message">Add a message:</label>
+                <textarea id="share-message" placeholder="I just completed Level 1 in Make It 12! Can you beat my score?"></textarea>
+            </div>
+            <button id="close-share" class="primary-button">Done</button>
+        </div>
+    </div>
+
+    <!-- Achievements Modal -->
+    <div id="achievements-modal" class="modal hidden">
+        <div class="modal-content achievements-modal">
+            <div class="modal-header">
+                <h3>Achievements</h3>
+                <button id="close-achievements" class="close-button">&times;</button>
+            </div>
+            <div class="achievement-filters">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="progress">Progress</option>
+                    <option value="combo">Combo Master</option>
+                    <option value="speed">Speed Demon</option>
+                </select>
+            </div>
+            <div class="achievements-grid" id="achievements-grid">
+                <!-- Achievements will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="modal hidden">
+        <div class="modal-content leaderboard-modal">
+            <div class="modal-header">
+                <h3>Leaderboard</h3>
+                <button id="close-leaderboard" class="close-button">&times;</button>
+            </div>
+            <div class="leaderboard-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Score</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <!-- Leaderboard data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="leaderboard-actions">
+                <button id="share-rank" class="primary-button">Share My Rank</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content settings-modal">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button id="close-settings" class="close-button">&times;</button>
+            </div>
+            <div class="settings-tabs">
+                <button class="tab-button active" data-tab="audio">Audio</button>
+                <button class="tab-button" data-tab="gameplay">Gameplay</button>
+                <button class="tab-button" data-tab="ai-assist">AI Assist</button>
+                <button class="tab-button" data-tab="account">Account</button>
+                <button class="tab-button" data-tab="privacy">Privacy</button>
+            </div>
+            <div class="tab-content active" id="audio-tab">
+                <div class="setting-item">
+                    <label>Master Volume</label>
+                    <input type="range" id="master-volume" min="0" max="100" value="80">
+                </div>
+                <div class="setting-item">
+                    <label>Sound Effects</label>
+                    <input type="range" id="sfx-volume" min="0" max="100" value="90">
+                </div>
+                <div class="setting-item">
+                    <label>Background Music</label>
+                    <input type="range" id="music-volume" min="0" max="100" value="70">
+                </div>
+            </div>
+            <div class="tab-content" id="gameplay-tab">
+                <div class="setting-item">
+                    <label>Animation Speed</label>
+                    <input type="range" id="animation-speed" min="0.5" max="2" step="0.1" value="1">
+                </div>
+                <div class="setting-item">
+                    <label>Show Hints</label>
+                    <input type="checkbox" id="show-hints" checked>
+                </div>
+            </div>
+            <div class="tab-content" id="ai-assist-tab">
+                <div class="setting-item">
+                    <label>Cursor AI Assist</label>
+                    <input type="checkbox" id="ai-assist-toggle" checked>
+                </div>
+                <div class="setting-item">
+                    <label>Hint Frequency</label>
+                    <select id="hint-frequency">
+                        <option value="never">Never</option>
+                        <option value="rare">Rare</option>
+                        <option value="sometimes">Sometimes</option>
+                        <option value="often">Often</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tab-content" id="account-tab">
+                <div class="setting-item">
+                    <label>Username</label>
+                    <input type="text" id="username" value="Player1">
+                </div>
+                <div class="setting-item">
+                    <label>Email</label>
+                    <input type="email" id="email" value="player@example.com">
+                </div>
+            </div>
+            <div class="tab-content" id="privacy-tab">
+                <div class="setting-item">
+                    <label>Share Gameplay Data</label>
+                    <input type="checkbox" id="share-data" checked>
+                </div>
+                <div class="setting-item">
+                    <label>Show Online Status</label>
+                    <input type="checkbox" id="show-status" checked>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="modal hidden">
+        <div class="modal-content game-over-modal">
+            <h2>Game Over</h2>
+            <p>You've run out of health!</p>
+            <div class="final-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Final Score:</span>
+                    <span id="game-over-score" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Level Reached:</span>
+                    <span id="game-over-level" class="stat-value">1</span>
+                </div>
+            </div>
+            <div class="game-over-buttons">
+                <button id="restart-game" class="primary-button">Restart Game</button>
+                <button id="main-menu-return" class="secondary-button">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

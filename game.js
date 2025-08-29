@@ -41,9 +41,28 @@ class MakeIt12Game {
     }
     
     init() {
+        this.checkPlayerRegistration();
         this.bindEvents();
         this.showSplashScreen();
         this.loadGameData();
+    }
+    
+    checkPlayerRegistration() {
+        const storedPlayerData = localStorage.getItem('makeIt12PlayerData');
+        if (!storedPlayerData) {
+            // Redirect to registration page if no player data
+            window.location.href = 'register.html';
+            return;
+        }
+        
+        try {
+            this.playerData = JSON.parse(storedPlayerData);
+            console.log('Player data loaded:', this.playerData);
+        } catch (error) {
+            console.error('Error parsing player data:', error);
+            // Redirect to registration page if data is corrupted
+            window.location.href = 'register.html';
+        }
     }
     
     bindEvents() {

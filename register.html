@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make It 12 - Player Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .registration-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--royal-beige) 0%, var(--soft-beige) 100%);
+            padding: 20px;
+        }
+        
+        .registration-card {
+            background-color: var(--soft-beige);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px var(--shadow);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .registration-header {
+            margin-bottom: 30px;
+        }
+        
+        .registration-header h1 {
+            color: var(--deep-brown);
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+        
+        .registration-header p {
+            color: var(--warm-brown);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--deep-brown);
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--royal-beige);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            color: var(--deep-brown);
+            background-color: var(--ivory-white);
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--warm-brown);
+            box-shadow: 0 0 10px var(--glow);
+        }
+        
+        .form-group input::placeholder {
+            color: var(--warm-brown);
+            opacity: 0.7;
+        }
+        
+        .start-game-btn {
+            background-color: var(--warm-brown);
+            color: var(--ivory-white);
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .start-game-btn:hover {
+            background-color: var(--deep-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+        
+        .start-game-btn:disabled {
+            background-color: var(--royal-beige);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .error-message {
+            color: #d32f2f;
+            background-color: #ffebee;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #2e7d32;
+            background-color: #e8f5e8;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--royal-beige);
+            border-top: 2px solid var(--warm-brown);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .leaderboard-preview {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--ivory-white);
+            border-radius: 15px;
+            border: 2px solid var(--royal-beige);
+        }
+        
+        .leaderboard-preview h3 {
+            color: var(--deep-brown);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .top-players {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .player-rank {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: var(--soft-beige);
+            border-radius: 8px;
+            border-left: 4px solid var(--warm-brown);
+        }
+        
+        .rank-number {
+            font-weight: bold;
+            color: var(--warm-brown);
+            font-size: 18px;
+        }
+        
+        .player-info {
+            text-align: left;
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .player-name {
+            font-weight: 600;
+            color: var(--deep-brown);
+            font-size: 16px;
+        }
+        
+        .player-score {
+            color: var(--warm-brown);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .registration-card {
+                padding: 30px 20px;
+            }
+            
+            .registration-header h1 {
+                font-size: 28px;
+            }
+            
+            .registration-header p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <div class="registration-card">
+            <div class="registration-header">
+                <h1>Make It 12</h1>
+                <p>Enter your details to start playing and compete on the leaderboard!</p>
+            </div>
+            
+            <div class="error-message" id="error-message"></div>
+            <div class="success-message" id="success-message"></div>
+            
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="player-name">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="player-name" 
+                        name="player-name" 
+                        placeholder="Enter your full name"
+                        required
+                        minlength="2"
+                        maxlength="50"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone-number">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone-number" 
+                        name="phone-number" 
+                        placeholder="Enter your phone number"
+                        required
+                        pattern="[0-9+\-\s\(\)]{10,}"
+                        title="Please enter a valid phone number"
+                    >
+                </div>
+                
+                <button type="submit" class="start-game-btn" id="start-btn">
+                    Start Game
+                </button>
+            </form>
+            
+            <div class="leaderboard-preview">
+                <h3>🏆 Top Players</h3>
+                <div class="top-players" id="top-players">
+                    <div class="loading-placeholder">Loading leaderboard...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="airtable-integration.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>

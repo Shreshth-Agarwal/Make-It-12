@@ -1,41 +1,90 @@
 # Make It 12 - Puzzle Challenge Game
 
-A modern, engaging puzzle game where players must combine tiles to make combinations that equal exactly 12. Built with HTML5, CSS3, and vanilla JavaScript, featuring a beautiful warm color palette and comprehensive game mechanics.
+A modern, engaging puzzle game where players must combine tiles to make combinations that equal exactly 12. Built with HTML5, CSS3, and vanilla JavaScript, featuring a beautiful warm color palette, comprehensive game mechanics, and integrated player registration and ranking system.
 
 ## 🎮 Game Overview
 
-**Make It 12** is a strategic puzzle game that challenges players to think mathematically while racing against time. Select tiles strategically to create combinations that sum to 12, chain combos for bonus points, and unlock achievements as you progress through increasingly challenging levels.
+**Make It 12** is a strategic puzzle game that challenges players to think mathematically while racing against time. Players register with their name and phone number, then compete on a global leaderboard. Select tiles strategically to create combinations that sum to 12, chain combos for bonus points, and unlock achievements as you progress through increasingly challenging levels.
 
-## ✨ Features
+## ✨ New Features
 
-### Core Gameplay
-- **Tile Selection**: Tap tiles to select them and create combinations
-- **Smart Combinations**: Find tiles that add up to exactly 12
-- **Combo System**: Chain successful combinations for multiplier bonuses
-- **Progressive Difficulty**: Board size increases with each level
-- **Time Management**: Race against the clock for time bonuses
+### 🔐 Player Registration System
+- **Registration Page**: Players enter name and phone number before playing
+- **Data Validation**: Form validation ensures proper data entry
+- **Returning Players**: Automatic recognition of existing players
+- **Top Players Preview**: Shows current leaderboard on registration page
 
-### User Interface
-- **Beautiful Design**: Warm beige and brown color palette for comfortable gameplay
-- **Responsive Layout**: Works seamlessly on desktop and mobile devices
-- **Smooth Animations**: Engaging visual feedback for all interactions
-- **Intuitive Controls**: Simple tap/click mechanics with visual cues
+### 🏆 Airtable Integration & Rankings
+- **Cloud Storage**: Player data stored securely in Airtable
+- **Real-time Leaderboard**: Live rankings based on high scores
+- **Player Statistics**: Track games played, total score, best combo
+- **Persistent Data**: Game progress saved across sessions
 
-### Game Features
-- **Achievement System**: Unlock badges for various accomplishments
-- **Leaderboard**: Compete with other players for high scores
-- **Progress Tracking**: Save game state and continue where you left off
-- **Settings Customization**: Adjust audio, gameplay, and AI assist options
+### 🎯 Dual Game Modes
+- **Addition Mode**: Classic tile addition (5+3+4=12)
+- **Math Operations Mode**: Use +, -, ×, ÷ operations (6×2=12, 24÷2=12, 15-3=12)
 
-### Social Features
-- **Achievement Sharing**: Share your accomplishments on social media
-- **Score Sharing**: Challenge friends to beat your scores
-- **Social Integration**: Connect with Instagram, Twitter, and Facebook
+## 🚀 Getting Started
 
-### AI Assist
-- **Cursor AI Integration**: Toggle AI assistance for hints and guidance
-- **Smart Hints**: Get help when you're stuck on a level
-- **Adaptive Difficulty**: AI adjusts based on your skill level
+### Prerequisites
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- Airtable account and base setup (for leaderboard functionality)
+
+### Airtable Setup
+1. Create a new Airtable base
+2. Create a table named "Players" with these fields:
+   - `Name` (Single line text)
+   - `Phone` (Phone number)
+   - `HighScore` (Number)
+   - `CurrentLevel` (Number)
+   - `GamesPlayed` (Number)
+   - `TotalScore` (Number)
+   - `BestCombo` (Number)
+   - `LastPlayed` (Date)
+   - `GameMode` (Single select: addition, math)
+
+3. Update `airtable-integration.js`:
+   - Replace `appYourBaseID` with your actual Airtable base ID
+   - The API token is already configured
+
+### Installation
+1. Clone or download this repository
+2. Set up your Airtable base as described above
+3. Update the base ID in `airtable-integration.js`
+4. Open `register.html` in your web browser to start
+5. Register as a new player and start playing!
+
+## 🎯 How to Play
+
+### Registration Flow
+1. **Enter Details**: Provide your name and phone number
+2. **View Leaderboard**: See current top players
+3. **Start Playing**: Click "Start Game" to begin
+
+### Game Modes
+1. **Addition Only**: Select tiles that add up to exactly 12
+2. **Math Operations**: Use any mathematical operation to make 12
+   - Examples: 6×2=12, 24÷2=12, 15-3=12, 8+4=12
+
+### Scoring & Ranking
+- **Base Score**: 100 points per successful combination
+- **Combo Multiplier**: Chain combinations for bonus points
+- **Time Bonus**: Complete levels quickly for extra points
+- **Global Ranking**: Compete against all players worldwide
+
+## 🏆 Achievements System
+
+### Progress Achievements
+- **First Steps**: Complete your first level
+- **Perfect Score**: Achieve a high score on any level
+- **Survivor**: Complete 5 levels without losing health
+- **Math Wizard**: Complete 3 levels in Math Operations mode
+
+### Skill Achievements
+- **Combo Master**: Achieve a 5x combo multiplier
+- **Speed Demon**: Complete a level in under 30 seconds
+- **Multiplication Master**: Use multiplication in Math Operations mode
+- **Division Expert**: Use division in Math Operations mode
 
 ## 🎨 Design System
 
@@ -51,244 +100,116 @@ A modern, engaging puzzle game where players must combine tiles to make combinat
 - **Body**: Open Sans (sans-serif) for readable content
 - **Buttons**: Open Sans semi-bold for clear call-to-actions
 
-### Icons
-- **Minimalist Style**: Clean, stroke-based iconography
-- **Consistent Sizing**: 24x24px for actions, 32x32px for important elements
-- **Warm Brown Strokes**: Consistent with the overall color scheme
+## 📱 File Structure
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No additional software installation required
-
-### Installation
-1. Clone or download this repository
-2. Open `index.html` in your web browser
-3. Start playing immediately!
-
-### Alternative: Live Server
-If you have Node.js installed:
-```bash
-# Install live-server globally
-npm install -g live-server
-
-# Navigate to the project directory
-cd make-it-12
-
-# Start the development server
-live-server
+```
+Make-It-12/
+├── register.html          # Player registration page (entry point)
+├── index.html            # Main game interface
+├── styles.css            # Complete styling
+├── game.js              # Game logic and mechanics
+├── register.js          # Registration page logic
+├── airtable-integration.js # Airtable API integration
+├── package.json         # Project configuration
+└── README.md           # Documentation
 ```
 
-## 🎯 How to Play
+## 🔧 Technical Features
 
-### Basic Rules
-1. **Select Tiles**: Click or tap tiles to select them
-2. **Make 12**: Choose tiles that add up to exactly 12
-3. **Clear Tiles**: When you make 12, tiles disappear and you score points
-4. **Chain Combos**: Quick successive combinations earn bonus multipliers
-5. **Beat the Clock**: Complete levels before time runs out
+### Registration System
+- **Form Validation**: Client-side validation for name and phone
+- **Phone Formatting**: Automatic phone number formatting
+- **Duplicate Detection**: Checks for existing players
+- **Data Persistence**: Local storage backup
 
-### Scoring System
-- **Base Score**: 100 points per successful combination
-- **Combo Bonus**: Multiplier increases with each consecutive combination
-- **Time Bonus**: Extra points for completing levels quickly
-- **Level Bonus**: Additional points for higher difficulty levels
+### Airtable Integration
+- **CRUD Operations**: Create, read, update player records
+- **Leaderboard Queries**: Sorted by high score and level
+- **Error Handling**: Graceful fallbacks for API issues
+- **Data Synchronization**: Real-time updates
 
-### Progression
-- **Level 1**: 4x4 grid, 60 seconds
-- **Level 2+**: Grid size increases, more time available
-- **Difficulty Scaling**: More complex combinations required
-- **Unlockables**: Achievements and special tiles appear
+### Game Mechanics
+- **Dual Modes**: Addition and mathematical operations
+- **Smart Board Generation**: Ensures solvable puzzles
+- **Combo System**: Multiplier bonuses for consecutive plays
+- **Achievement Tracking**: Progress monitoring and unlocks
 
-## 🏆 Achievements
+## 🌐 Deployment
 
-### Progress Achievements
-- **First Steps**: Complete your first level
-- **Perfect Score**: Achieve a high score on any level
-- **Survivor**: Complete 5 levels without losing health
+### GitHub Pages Setup
+1. Push all files to your GitHub repository
+2. Go to repository Settings → Pages
+3. Select "Deploy from a branch" → main branch
+4. Your game will be available at: `https://yourusername.github.io/repository-name/register.html`
 
-### Skill Achievements
-- **Combo Master**: Achieve a 5x combo multiplier
-- **Speed Demon**: Complete a level in under 30 seconds
+### Custom Domain (Optional)
+1. Add a `CNAME` file with your domain
+2. Configure DNS settings
+3. Enable HTTPS in GitHub Pages settings
 
-## ⚙️ Settings & Customization
+## 🔐 Security & Privacy
 
-### Audio Settings
-- Master volume control
-- Sound effects volume
-- Background music volume
+### Data Protection
+- **Minimal Data**: Only name and phone number collected
+- **Secure Storage**: Data encrypted in Airtable
+- **No Sensitive Info**: No passwords or personal details
+- **User Control**: Players can request data deletion
 
-### Gameplay Settings
-- Animation speed adjustment
-- Hint system toggle
-- AI assist preferences
-
-### Account Settings
-- Username customization
-- Email preferences
-- Privacy controls
-
-## 🔧 Technical Details
-
-### Architecture
-- **Vanilla JavaScript**: No external frameworks required
-- **ES6+ Features**: Modern JavaScript with classes and modules
-- **Local Storage**: Game progress saved locally
-- **Responsive Design**: CSS Grid and Flexbox for layouts
-
-### Browser Support
-- **Chrome**: 60+
-- **Firefox**: 55+
-- **Safari**: 12+
-- **Edge**: 79+
-
-### Performance
-- **Optimized Rendering**: Efficient DOM manipulation
-- **Memory Management**: Proper cleanup of event listeners
-- **Smooth Animations**: CSS transitions and keyframes
-- **Mobile Optimized**: Touch-friendly interactions
-
-## 🎮 Game Controls
-
-### Desktop
-- **Mouse Click**: Select/deselect tiles
-- **Escape Key**: Close modals
-- **H Key**: Request hint (during gameplay)
-
-### Mobile
-- **Touch**: Tap tiles to select
-- **Swipe**: Navigate between screens
-- **Pinch**: Zoom in/out (if implemented)
+### API Security
+- **Token Protection**: Airtable API token secured
+- **Rate Limiting**: Built-in Airtable rate limits
+- **Error Handling**: No sensitive data exposed in errors
 
 ## 🚧 Future Enhancements
 
 ### Planned Features
-- **Multiplayer Mode**: Real-time competitive gameplay
-- **Custom Levels**: Level editor for creating puzzles
-- **Sound Effects**: Immersive audio experience
-- **Particle Effects**: Enhanced visual feedback
-- **Daily Challenges**: New puzzles every day
+- **Social Login**: Google/Facebook authentication
+- **Real-time Multiplayer**: Live competitive gameplay
+- **Tournament Mode**: Organized competitions
+- **Mobile App**: Native iOS/Android versions
+- **Advanced Analytics**: Detailed player statistics
 
 ### Technical Improvements
-- **Progressive Web App**: Installable on mobile devices
-- **Offline Support**: Play without internet connection
-- **Cloud Sync**: Save progress across devices
-- **Analytics**: Track gameplay patterns and improvements
+- **Offline Mode**: Play without internet connection
+- **Push Notifications**: Achievement and challenge alerts
+- **Data Export**: Player statistics download
+- **Admin Dashboard**: Player management interface
 
 ## 🤝 Contributing
 
-We welcome contributions to improve Make It 12! Here are some ways you can help:
+We welcome contributions! Areas for improvement:
+- **UI/UX Enhancements**: Better visual design
+- **New Game Modes**: Additional puzzle variations
+- **Performance**: Optimization and speed improvements
+- **Accessibility**: Better support for all users
+- **Testing**: Automated test coverage
 
-### Development
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## 📞 Support
 
-### Areas for Contribution
-- **Bug Fixes**: Report and fix any issues you find
-- **New Features**: Add exciting gameplay elements
-- **UI/UX Improvements**: Enhance the visual design
-- **Performance Optimization**: Make the game faster and smoother
-- **Documentation**: Improve code comments and README
-
-### Code Style
-- Follow existing code formatting
-- Add comments for complex logic
-- Use meaningful variable names
-- Test changes across different browsers
-
-## 📱 Mobile Experience
-
-### Responsive Design
-- **Adaptive Layouts**: Automatically adjust to screen size
-- **Touch Optimization**: Large touch targets for mobile users
-- **Gesture Support**: Swipe and tap gestures
-- **Performance**: Optimized for mobile devices
-
-### Mobile Features
-- **Fullscreen Mode**: Immersive mobile gaming
-- **Touch Feedback**: Visual response to touch interactions
-- **Orientation Support**: Works in portrait and landscape
-- **Battery Optimization**: Efficient resource usage
-
-## 🎨 Customization
-
-### Themes
-The game supports easy theming through CSS custom properties:
-
-```css
-:root {
-    --royal-beige: #D2B48C;
-    --warm-brown: #8B5E3C;
-    --soft-beige: #F5F5DC;
-    --deep-brown: #5C4033;
-    --ivory-white: #FFFFF0;
-}
-```
-
-### Modifying Colors
-To change the game's appearance:
-1. Edit the CSS variables in `styles.css`
-2. Update the color values to your preference
-3. Ensure sufficient contrast for accessibility
-
-## 🐛 Troubleshooting
+### Setup Help
+- Check Airtable base configuration
+- Verify API token and base ID
+- Ensure proper field names and types
+- Test with browser developer tools
 
 ### Common Issues
-
-**Game won't start**
-- Check browser console for JavaScript errors
-- Ensure all files are in the same directory
-- Try refreshing the page
-
-**Tiles not responding**
-- Check if JavaScript is enabled
-- Try clicking instead of tapping on mobile
-- Clear browser cache and reload
-
-**Performance issues**
-- Close other browser tabs
-- Update to latest browser version
-- Check available system memory
-
-### Browser Compatibility
-If you experience issues:
-- Update to the latest browser version
-- Try a different browser
-- Check browser console for error messages
+- **Registration fails**: Check Airtable connectivity
+- **Leaderboard empty**: Verify API permissions
+- **Data not saving**: Check browser local storage
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
-
-- **Design Inspiration**: Modern puzzle game aesthetics
-- **Color Palette**: Warm, comfortable gaming experience
-- **Typography**: Google Fonts for beautiful text rendering
-- **Icons**: Custom SVG icons for consistent design
-- **Community**: Feedback and suggestions from players
-
-## 📞 Support
-
-### Getting Help
-- **GitHub Issues**: Report bugs and request features
-- **Documentation**: Check this README for common solutions
-- **Community**: Join discussions in the project repository
-
-### Reporting Issues
-When reporting problems, please include:
-- Browser and version
-- Operating system
-- Steps to reproduce
-- Screenshots if applicable
-- Console error messages
-
 ---
 
-**Enjoy playing Make It 12!** 🎉
+**Start your puzzle journey!** 🎉
 
-*Challenge your mind, beat the clock, and become the ultimate puzzle master!*
+*Register now, compete globally, and become the ultimate Make It 12 champion!*
+
+## 🔗 Quick Links
+
+- **Play Now**: Open `register.html` to start
+- **Leaderboard**: Compete against players worldwide
+- **Achievements**: Unlock badges and rewards
+- **Game Modes**: Choose your challenge level

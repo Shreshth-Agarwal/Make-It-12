@@ -34,6 +34,27 @@
                 </button>
             </div>
             <div class="menu-buttons">
+                <div class="game-mode-selector">
+                    <h4>Select Game Mode</h4>
+                    <div class="mode-options">
+                        <label class="mode-option">
+                            <input type="radio" name="game-mode" value="addition" checked>
+                            <span class="mode-card">
+                                <div class="mode-icon">+</div>
+                                <div class="mode-title">Addition Only</div>
+                                <div class="mode-description">Combine tiles that add up to 12</div>
+                            </span>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="game-mode" value="math">
+                            <span class="mode-card">
+                                <div class="mode-icon">±×÷</div>
+                                <div class="mode-title">Math Operations</div>
+                                <div class="mode-description">Use +, -, ×, ÷ to make 12</div>
+                            </span>
+                        </label>
+                    </div>
+                </div>
                 <button id="start-game" class="primary-button">Start Game</button>
                 <button id="achievements" class="primary-button">Achievements</button>
                 <button id="leaderboard" class="primary-button">Leaderboard</button>
@@ -73,17 +94,47 @@
                 </div>
                 <div class="tutorial-step" data-step="2">
                     <h4>Step 2: Make Combinations</h4>
-                    <p>Select tiles that add up to exactly 12. You can select multiple tiles!</p>
-                    <div class="tutorial-demo">
-                        <div class="demo-tile selected">5</div>
-                        <div class="demo-tile selected">3</div>
-                        <div class="demo-tile selected">4</div>
-                        <div class="demo-result">= 12 ✓</div>
+                    <div class="mode-explanation">
+                        <div class="addition-mode-explanation">
+                            <h5>Addition Mode:</h5>
+                            <p>Select tiles that add up to exactly 12. You can select multiple tiles!</p>
+                            <div class="tutorial-demo">
+                                <div class="demo-tile selected">5</div>
+                                <div class="demo-tile selected">3</div>
+                                <div class="demo-tile selected">4</div>
+                                <div class="demo-result">= 12 ✓</div>
+                            </div>
+                        </div>
+                        <div class="math-mode-explanation">
+                            <h5>Math Operations Mode:</h5>
+                            <p>Use +, -, ×, ÷ operations to make combinations equal to 12!</p>
+                            <div class="tutorial-demo">
+                                <div class="demo-tile selected">6</div>
+                                <div class="demo-operation">×</div>
+                                <div class="demo-tile selected">2</div>
+                                <div class="demo-result">= 12 ✓</div>
+                            </div>
+                            <div class="tutorial-demo">
+                                <div class="demo-tile selected">24</div>
+                                <div class="demo-operation">÷</div>
+                                <div class="demo-tile selected">2</div>
+                                <div class="demo-result">= 12 ✓</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tutorial-step" data-step="3">
                     <h4>Step 3: Clear and Score</h4>
                     <p>When you make 12, the tiles disappear and you earn points. Chain combos for bonus points!</p>
+                    <div class="tutorial-tip">
+                        <strong>Tip:</strong> In Math Operations mode, think about different ways to reach 12:
+                        <ul>
+                            <li>6 × 2 = 12</li>
+                            <li>24 ÷ 2 = 12</li>
+                            <li>15 - 3 = 12</li>
+                            <li>8 + 4 = 12</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="tutorial-controls">
@@ -113,6 +164,9 @@
                 </div>
                 <div class="level-display">
                     <span id="current-level">Level 1</span>
+                    <div class="game-mode-indicator" id="game-mode-indicator">
+                        <span class="mode-badge addition">+</span>
+                    </div>
                 </div>
                 <div class="timer-display">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

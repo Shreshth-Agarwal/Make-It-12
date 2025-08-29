@@ -2,6 +2,7 @@
 class MakeIt12Game {
     constructor() {
         this.currentScreen = 'splash';
+        this.gameMode = 'addition'; // 'addition' or 'math'
         this.gameState = {
             level: 1,
             score: 0,
@@ -22,7 +23,10 @@ class MakeIt12Game {
             { id: 'combo_master', title: 'Combo Master', description: 'Achieve a 5x combo', category: 'combo', unlocked: false, progress: 0, maxProgress: 5 },
             { id: 'speed_demon', title: 'Speed Demon', description: 'Complete a level in under 30 seconds', category: 'speed', unlocked: false, progress: 0, maxProgress: 1 },
             { id: 'perfect_score', title: 'Perfect Score', description: 'Get a perfect score on any level', category: 'progress', unlocked: false, progress: 0, maxProgress: 1 },
-            { id: 'survivor', title: 'Survivor', description: 'Complete 5 levels without losing health', category: 'progress', unlocked: false, progress: 0, maxProgress: 5 }
+            { id: 'survivor', title: 'Survivor', description: 'Complete 5 levels without losing health', category: 'progress', unlocked: false, progress: 0, maxProgress: 5 },
+            { id: 'math_wizard', title: 'Math Wizard', description: 'Complete 3 levels in Math Operations mode', category: 'progress', unlocked: false, progress: 0, maxProgress: 3 },
+            { id: 'multiplication_master', title: 'Multiplication Master', description: 'Use multiplication to make 12 in Math Operations mode', category: 'combo', unlocked: false, progress: 0, maxProgress: 1 },
+            { id: 'division_expert', title: 'Division Expert', description: 'Use division to make 12 in Math Operations mode', category: 'combo', unlocked: false, progress: 0, maxProgress: 1 }
         ];
         
         this.leaderboard = [
@@ -50,6 +54,14 @@ class MakeIt12Game {
         document.getElementById('settings').addEventListener('click', () => this.showSettings());
         document.getElementById('social').addEventListener('click', () => this.showSocial());
         document.getElementById('sound-toggle').addEventListener('click', () => this.toggleSound());
+        
+        // Game mode selection
+        document.querySelectorAll('input[name="game-mode"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                this.gameMode = e.target.value;
+                console.log('Game mode changed to:', this.gameMode);
+            });
+        });
         
         // Tutorial events
         document.getElementById('next-step').addEventListener('click', () => this.nextTutorialStep());
@@ -174,17 +186,32 @@ class MakeIt12Game {
         const boardSize = Math.min(4 + Math.floor(this.gameState.level / 3), 8);
         const targetSum = 12;
         
-        // Generate tiles that can make combinations equal to targetSum
+        // Generate tiles based on game mode
         this.gameState.board = [];
         const tileValues = [];
         
-        // Add some guaranteed combinations
-        const combinations = this.generateValidCombinations(targetSum, boardSize * boardSize);
-        tileValues.push(...combinations);
-        
-        // Fill remaining tiles with random values
-        while (tileValues.length < boardSize * boardSize) {
-            tileValues.push(Math.floor(Math.random() * 9) + 1);
+        if (this.gameMode === 'addition') {
+            // Addition mode: smaller numbers that can add to 12
+            const combinations = this.generateValidCombinations(targetSum, boardSize * boardSize);
+            tileValues.push(...combinations);
+            
+            // Fill remaining tiles with random values
+            while (tileValues.length < boardSize * boardSize) {
+                tileValues.push(Math.floor(Math.random() * 9) + 1);
+            }
+        } else {
+            // Math operations mode: larger numbers and operations
+            const combinations = this.generateMathCombinations(targetSum, boardSize * boardSize);
+            tileValues.push(...combinations);
+            
+            // Fill remaining tiles with numbers that can work with operations
+            while (tileValues.length < boardSize * boardSize) {
+                // Generate numbers that can potentially make 12 with operations
+                const num = Math.floor(Math.random() * 20) + 1;
+                if (num !== 12) { // Avoid having 12 directly
+                    tileValues.push(num);
+                }
+            }
         }
         
         // Shuffle tiles
@@ -220,6 +247,20 @@ class MakeIt12Game {
         combinations.push(7, 5); // 7+5 = 12
         combinations.push(8, 4); // 8+4 = 12
         combinations.push(9, 3); // 9+3 = 12
+        
+        return combinations;
+    }
+    
+    generateMathCombinations(targetSum, maxTiles) {
+        const combinations = [];
+        const maxValue = Math.min(20, targetSum);
+        
+        // Generate some simple combinations
+        combinations.push(10, 2); // 10 - 2 = 8
+        combinations.push(15, 3); // 15 - 3 = 12
+        combinations.push(20, 8); // 20 - 8 = 12
+        combinations.push(18, 6); // 18 - 6 = 12
+        combinations.push(12, 0); // 12 - 0 = 12 (edge case, might need adjustment)
         
         return combinations;
     }
@@ -272,16 +313,69 @@ class MakeIt12Game {
     checkCombination() {
         if (this.gameState.selectedTiles.length === 0) return;
         
-        const sum = this.gameState.selectedTiles.reduce((total, tile) => total + tile.value, 0);
+        let isValid = false;
         
-        if (sum === 12) {
+        if (this.gameMode === 'addition') {
+            // Addition mode: simple sum
+            const sum = this.gameState.selectedTiles.reduce((total, tile) => total + tile.value, 0);
+            isValid = sum === 12;
+        } else {
+            // Math operations mode: try different combinations
+            isValid = this.checkMathCombination();
+        }
+        
+        if (isValid) {
             this.clearTiles();
             this.updateScore();
             this.checkLevelComplete();
-        } else if (sum > 12) {
-            // Reset selection if sum exceeds 12
-            this.resetSelection();
+        } else if (this.gameMode === 'addition') {
+            // Only reset selection in addition mode if sum exceeds 12
+            const sum = this.gameState.selectedTiles.reduce((total, tile) => total + tile.value, 0);
+            if (sum > 12) {
+                this.resetSelection();
+            }
         }
+    }
+    
+    checkMathCombination() {
+        const tiles = this.gameState.selectedTiles;
+        if (tiles.length < 2) return false;
+        
+        // Try different mathematical operations
+        const values = tiles.map(t => t.value);
+        
+        // Check if any combination of operations can make 12
+        return this.canMake12WithOperations(values);
+    }
+    
+    canMake12WithOperations(values) {
+        if (values.length === 2) {
+            const [a, b] = values;
+            // Check basic operations
+            if (a + b === 12) return true;
+            if (a - b === 12) return true;
+            if (b - a === 12) return true;
+            if (a * b === 12) return true;
+            if (a / b === 12) return true;
+            if (b / a === 12) return true;
+        } else if (values.length === 3) {
+            const [a, b, c] = values;
+            // Check combinations of operations
+            if (a + b + c === 12) return true;
+            if (a + b - c === 12) return true;
+            if (a - b + c === 12) return true;
+            if (a - b - c === 12) return true;
+            if (a * b + c === 12) return true;
+            if (a * b - c === 12) return true;
+            if (a + b * c === 12) return true;
+            if (a - b * c === 12) return true;
+            if (a * b * c === 12) return true;
+            if (a * b / c === 12) return true;
+            if (a / b * c === 12) return true;
+            if (a / b / c === 12) return true;
+        }
+        
+        return false;
     }
     
     clearTiles() {
@@ -450,6 +544,12 @@ class MakeIt12Game {
         document.getElementById('time-left').textContent = this.gameState.timeLeft;
         document.getElementById('combo-text').textContent = `Combo x${this.gameState.combo}`;
         document.getElementById('score-text').textContent = `Score: ${this.gameState.score}`;
+        
+        // Update game mode indicator
+        const modeIndicator = document.getElementById('game-mode-indicator');
+        const modeBadge = modeIndicator.querySelector('.mode-badge');
+        modeBadge.textContent = this.gameMode === 'addition' ? '+' : '±×÷';
+        modeBadge.className = `mode-badge ${this.gameMode}`;
     }
     
     gameOver() {
@@ -666,6 +766,38 @@ class MakeIt12Game {
         // Check for perfect score (could be enhanced)
         if (this.gameState.score >= 1000) {
             this.unlockAchievement('perfect_score');
+        }
+        
+        // Check for math operations achievements
+        if (this.gameMode === 'math') {
+            this.checkMathAchievements();
+        }
+    }
+    
+    checkMathAchievements() {
+        // Track math wizard achievement
+        const mathWizard = this.achievements.find(a => a.id === 'math_wizard');
+        if (mathWizard && !mathWizard.unlocked) {
+            mathWizard.progress = Math.min(mathWizard.progress + 1, mathWizard.maxProgress);
+            if (mathWizard.progress >= mathWizard.maxProgress) {
+                this.unlockAchievement('math_wizard');
+            }
+        }
+        
+        // Check for multiplication and division usage
+        if (this.gameState.selectedTiles.length >= 2) {
+            const values = this.gameState.selectedTiles.map(t => t.value);
+            const [a, b] = values;
+            
+            // Check multiplication
+            if (a * b === 12) {
+                this.unlockAchievement('multiplication_master');
+            }
+            
+            // Check division
+            if ((a / b === 12) || (b / a === 12)) {
+                this.unlockAchievement('division_expert');
+            }
         }
     }
     

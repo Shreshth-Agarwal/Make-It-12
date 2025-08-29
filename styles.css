@@ -1049,3 +1049,165 @@ button {
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+
+/* Game Mode Selector */
+.game-mode-selector {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.game-mode-selector h4 {
+    color: var(--deep-brown);
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.mode-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mode-option {
+    cursor: pointer;
+    display: block;
+}
+
+.mode-option input[type="radio"] {
+    display: none;
+}
+
+.mode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--soft-beige);
+    border: 3px solid var(--royal-beige);
+    border-radius: 15px;
+    min-width: 160px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.mode-option input[type="radio"]:checked + .mode-card {
+    border-color: var(--warm-brown);
+    background-color: var(--royal-beige);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+.mode-icon {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--warm-brown);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px var(--shadow);
+}
+
+.mode-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--deep-brown);
+    margin-bottom: 8px;
+}
+
+.mode-description {
+    font-size: 12px;
+    color: var(--deep-brown);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.mode-option:hover .mode-card {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* Responsive adjustments for mode selector */
+@media (max-width: 768px) {
+    .mode-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mode-card {
+        min-width: 200px;
+    }
+}
+
+/* Game Mode Indicator */
+.game-mode-indicator {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.mode-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--ivory-white);
+    background-color: var(--warm-brown);
+    border: 2px solid var(--deep-brown);
+}
+
+.mode-badge.addition {
+    background-color: var(--warm-brown);
+}
+
+.mode-badge.math {
+    background-color: var(--deep-brown);
+}
+
+/* Tutorial Mode Explanations */
+.mode-explanation {
+    margin: 20px 0;
+}
+
+.addition-mode-explanation,
+.math-mode-explanation {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--ivory-white);
+    border-radius: 10px;
+    border-left: 4px solid var(--warm-brown);
+}
+
+.addition-mode-explanation h5,
+.math-mode-explanation h5 {
+    color: var(--deep-brown);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.demo-operation {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--warm-brown);
+    margin: 0 10px;
+}
+
+.tutorial-tip {
+    background-color: var(--soft-beige);
+    border: 2px solid var(--royal-beige);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.tutorial-tip strong {
+    color: var(--deep-brown);
+}
+
+.tutorial-tip ul {
+    margin: 10px 0 0 20px;
+    color: var(--deep-brown);
+}
+
+.tutorial-tip li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}

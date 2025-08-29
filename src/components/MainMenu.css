@@ -1,0 +1,313 @@
+.main-menu {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  position: relative;
+}
+
+.menu-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Sound Toggle - Top Right */
+.sound-toggle {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  background: var(--soft-beige);
+  border: 2px solid var(--warm-brown);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-medium);
+  z-index: 10;
+}
+
+.sound-toggle:hover {
+  background: var(--warm-brown);
+  transform: scale(1.1);
+}
+
+.sound-toggle:hover .icon {
+  color: var(--ivory-white);
+}
+
+/* Main Menu Card */
+.menu-card {
+  background: var(--soft-beige);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-strong);
+  border: 2px solid var(--warm-brown);
+  text-align: center;
+  position: relative;
+}
+
+.menu-title {
+  margin-bottom: var(--spacing-xl);
+}
+
+.menu-title h1 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--deep-brown);
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 2px 2px 4px rgba(92, 64, 51, 0.2);
+}
+
+.menu-title p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--deep-brown);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Menu Buttons */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.menu-buttons .btn {
+  min-width: 200px;
+  min-height: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  transition: all 0.2s ease;
+}
+
+.btn-icon {
+  color: inherit;
+}
+
+/* Tutorial Section */
+.tutorial-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.tutorial-btn {
+  background: none;
+  border: none;
+  color: var(--warm-brown);
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin: 0 auto;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.tutorial-btn:hover {
+  color: var(--deep-brown);
+  background: rgba(139, 94, 60, 0.1);
+}
+
+/* Corner Buttons */
+.corner-button {
+  position: absolute;
+  bottom: -60px;
+  background: var(--soft-beige);
+  border: 2px solid var(--warm-brown);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-medium);
+}
+
+.corner-button:hover {
+  background: var(--warm-brown);
+  transform: scale(1.1);
+}
+
+.corner-button:hover .icon {
+  color: var(--ivory-white);
+}
+
+.corner-button.bottom-left {
+  left: 0;
+}
+
+.corner-button.bottom-right {
+  right: 0;
+}
+
+/* Tutorial Modal */
+.tutorial-modal {
+  max-width: 500px;
+  max-height: 80vh;
+}
+
+.tutorial-steps {
+  margin: var(--spacing-lg) 0;
+}
+
+.tutorial-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: rgba(210, 180, 140, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.step-number {
+  background: var(--warm-brown);
+  color: var(--ivory-white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: 18px;
+  color: var(--deep-brown);
+}
+
+.step-content p {
+  margin: 0;
+  color: var(--deep-brown);
+  opacity: 0.8;
+}
+
+.tutorial-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+/* AI Toggle Section */
+.ai-toggle-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.ai-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--deep-brown);
+}
+
+.ai-toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  background: var(--soft-beige);
+  border: 2px solid var(--warm-brown);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--warm-brown);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.ai-toggle-label input[type="checkbox"]:checked + .toggle-slider {
+  background: var(--warm-brown);
+}
+
+.ai-toggle-label input[type="checkbox"]:checked + .toggle-slider::before {
+  transform: translateX(24px);
+  background: var(--ivory-white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-menu {
+    padding: var(--spacing-md);
+  }
+  
+  .menu-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .menu-title h1 {
+    font-size: 28px;
+  }
+  
+  .menu-buttons .btn {
+    min-width: 160px;
+    min-height: 44px;
+    font-size: 13px;
+  }
+  
+  .sound-toggle,
+  .corner-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sound-toggle {
+    top: -50px;
+  }
+  
+  .corner-button {
+    bottom: -50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-title h1 {
+    font-size: 24px;
+  }
+  
+  .menu-title p {
+    font-size: 14px;
+  }
+  
+  .tutorial-modal {
+    margin: var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+}

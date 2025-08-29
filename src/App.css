@@ -1,0 +1,205 @@
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--royal-beige) 0%, #C4A484 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 94, 60, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(210, 180, 140, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Page Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Responsive Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Game-specific styles */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(92, 64, 51, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: var(--soft-beige);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-strong);
+  border: 2px solid var(--warm-brown);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--warm-brown);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: var(--warm-brown);
+  color: var(--ivory-white);
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--spacing-lg);
+}
+
+.loading-text {
+  color: var(--deep-brown);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Error States */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--spacing-lg);
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.error-icon {
+  font-size: 64px;
+  color: #D32F2F;
+}
+
+.error-message {
+  color: var(--deep-brown);
+  font-size: 18px;
+  max-width: 500px;
+}
+
+/* Success States */
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--spacing-lg);
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.success-icon {
+  font-size: 64px;
+  color: #4CAF50;
+}
+
+.success-message {
+  color: var(--deep-brown);
+  font-size: 18px;
+  max-width: 500px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--soft-beige);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--warm-brown);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--deep-brown);
+}
+
+/* Focus States for Accessibility */
+.btn:focus,
+.modal-close:focus {
+  outline: 2px solid var(--warm-brown);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .app {
+    background: white;
+  }
+  
+  .btn,
+  .modal-overlay {
+    display: none;
+  }
+}

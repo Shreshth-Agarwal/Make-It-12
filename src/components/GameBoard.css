@@ -1,0 +1,220 @@
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Target Display */
+.target-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: var(--soft-beige);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--warm-brown);
+  box-shadow: var(--shadow-medium);
+}
+
+.target-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--deep-brown);
+  font-weight: 600;
+}
+
+.target-value {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--warm-brown);
+  text-shadow: 2px 2px 4px rgba(139, 94, 60, 0.3);
+}
+
+/* Game Grid */
+.game-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  background: var(--soft-beige);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--warm-brown);
+  box-shadow: var(--shadow-strong);
+}
+
+.grid-row {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* Selection Feedback */
+.selection-feedback {
+  background: var(--soft-beige);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--warm-brown);
+  text-align: center;
+  box-shadow: var(--shadow-medium);
+}
+
+.selected-sum {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--deep-brown);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.valid-combination {
+  background: var(--warm-brown);
+  color: var(--ivory-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.valid-text {
+  font-size: 16px;
+}
+
+.invalid-combination {
+  background: #D32F2F;
+  color: var(--ivory-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.invalid-text {
+  font-size: 16px;
+}
+
+/* Moves Counter */
+.moves-counter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: var(--soft-beige);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--warm-brown);
+}
+
+.moves-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--deep-brown);
+  opacity: 0.8;
+}
+
+.moves-value {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--deep-brown);
+  font-weight: 700;
+}
+
+/* Game Instructions */
+.game-instructions {
+  text-align: center;
+  background: var(--soft-beige);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--warm-brown);
+  max-width: 400px;
+}
+
+.game-instructions p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--deep-brown);
+  line-height: 1.4;
+}
+
+.game-instructions p:first-child {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Loading State */
+.game-board-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+}
+
+.game-board-loading p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--deep-brown);
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-board {
+    max-width: 100%;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .target-display {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .target-label {
+    font-size: 14px;
+  }
+  
+  .target-value {
+    font-size: 28px;
+  }
+  
+  .game-grid {
+    padding: var(--spacing-md);
+  }
+  
+  .selection-feedback {
+    padding: var(--spacing-sm);
+  }
+  
+  .selected-sum {
+    font-size: 16px;
+  }
+  
+  .valid-text,
+  .invalid-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .target-display {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+  
+  .target-value {
+    font-size: 24px;
+  }
+  
+  .game-grid {
+    padding: var(--spacing-sm);
+  }
+  
+  .grid-row {
+    gap: var(--spacing-xs);
+  }
+}

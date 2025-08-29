@@ -23,9 +23,12 @@
   --radius-lg: 12px;
   
   /* Shadows */
-  --shadow-subtle: 0 2px 4px rgba(92, 64, 51, 0.1);
-  --shadow-medium: 0 4px 8px rgba(92, 64, 51, 0.15);
-  --shadow-strong: 0 8px 16px rgba(92, 64, 51, 0.2);
+--shadow-subtle: 0 2px 4px rgba(92, 64, 51, 0.1);
+--shadow-medium: 0 4px 8px rgba(92, 64, 51, 0.15);
+--shadow-strong: 0 8px 16px rgba(92, 64, 51, 0.2);
+
+/* Import shared components */
+@import './components/shared.css';
 }
 
 * {
